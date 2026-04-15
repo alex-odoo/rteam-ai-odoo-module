@@ -121,9 +121,15 @@ class RteamAiConnectWizard(models.TransientModel):
         apikeys = self.env["res.users.apikeys"]
         try:
             try:
+                # Odoo 19+: (scope, name, expiration_date)
                 return apikeys._generate("rpc", name, False)
             except TypeError:
-                return apikeys._generate("rpc", name)
+                try:
+                    # Odoo 15-18: (scope, name)
+                    return apikeys._generate("rpc", name)
+                except TypeError:
+                    # Odoo 14: (name) only, no scope
+                    return apikeys._generate(name)
         except Exception as exc:
             _logger.exception("Failed to generate Odoo API key for user %s", self.env.user.id)
             raise UserError(_(
