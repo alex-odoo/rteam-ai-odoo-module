@@ -98,13 +98,21 @@ class RteamAiConnection(models.Model):
         ),
     ]
 
-    @api.depends("token_last4", "state")
+    @api.depends("state")
     def _compute_bot_deep_link(self):
+        """Plain bot URL for already-bound users.
+
+        The one-time handshake deep link (with raw token) is only produced
+        inside the wizard at generation time and is never stored. Once the
+        user's Telegram account is bound to this Odoo, the bot recognises
+        them by telegramId — no payload needed.
+        """
+        bot_username = self.env["ir.config_parameter"].sudo().get_param(
+            "rteam_ai_assistant.bot_username", "RteamAI_bot"
+        )
         for record in self:
-            if record.state == "active" and record.token_last4:
-                record.bot_deep_link = (
-                    "https://t.me/RteamAI_bot?start=connect_%s" % record.id
-                )
+            if record.state == "active":
+                record.bot_deep_link = "https://t.me/%s" % bot_username
             else:
                 record.bot_deep_link = False
 
