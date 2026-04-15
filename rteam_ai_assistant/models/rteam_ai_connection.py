@@ -144,3 +144,63 @@ class RteamAiConnection(models.Model):
                 "default_mode": "rotate",
             },
         }
+
+    def action_open_bot(self):
+        self.ensure_one()
+        if self.state != "active" or not self.bot_deep_link:
+            raise UserError(_("Generate a token first to get the Telegram deep link."))
+        return {
+            "type": "ir.actions.act_url",
+            "url": self.bot_deep_link,
+            "target": "new",
+        }
+
+    @api.model
+    def _cleanup_orphan_drafts(self):
+        """Delete draft connections that never received a token.
+
+        Drafts exist only as a transient state between `create()` and
+        `_issue_token()`. Any draft surviving a session means the handshake
+        rolled back mid-flight (or the record was created manually via the
+        Connections list). They are never usable, so clean them up eagerly.
+        """
+        self.sudo().search([
+            ("state", "=", "draft"),
+            ("token_hash", "=", False),
+        ]).unlink()
+
+    @api.model
+    def action_home(self):
+        """Smart landing: open dashboard if user has an active connection,
+        else open the onboarding wizard.
+
+        Bound to the top-level "Rteam AI" menu item so the whole module has
+        a single, context-aware entry point.
+        """
+        self._cleanup_orphan_drafts()
+
+        active = self.sudo().search([
+            ("user_id", "=", self.env.user.id),
+            ("state", "=", "active"),
+        ], limit=1)
+
+        if active:
+            view = self.env.ref("rteam_ai_assistant.view_rteam_ai_connection_dashboard")
+            return {
+                "type": "ir.actions.act_window",
+                "name": "Rteam AI",
+                "res_model": "rteam.ai.connection",
+                "res_id": active.id,
+                "view_mode": "form",
+                "views": [(view.id, "form")],
+                "target": "current",
+            }
+
+        return {
+            "type": "ir.actions.act_window",
+            "name": "Connect to Rteam AI",
+            "res_model": "rteam.ai.connect.wizard",
+            "view_mode": "form",
+            "target": "new",
+            "context": {"default_mode": "new"},
+        }

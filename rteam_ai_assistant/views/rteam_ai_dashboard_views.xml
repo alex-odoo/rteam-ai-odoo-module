@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_rteam_ai_connection_dashboard" model="ir.ui.view">
+        <field name="name">rteam.ai.connection.dashboard</field>
+        <field name="model">rteam.ai.connection</field>
+        <field name="arch" type="xml">
+            <form string="Rteam AI" create="0" delete="0" edit="0">
+                <sheet>
+                    <div class="text-center" style="padding: 24px 0 12px 0;">
+                        <h1 style="margin: 0;">
+                            Connected to <field name="remote_organization_name" readonly="1" nolabel="1" class="oe_inline" placeholder="your Odoo"/>
+                        </h1>
+                        <p class="text-muted" style="margin-top: 8px;">
+                            Open the Telegram bot and ask anything about your Odoo data.
+                        </p>
+                    </div>
+
+                    <div class="text-center" style="padding: 12px 0 24px 0;">
+                        <button name="action_open_bot" type="object"
+                                string="Open @RteamAI_bot on Telegram"
+                                class="btn-primary btn-lg"/>
+                    </div>
+
+                    <group>
+                        <group string="Status">
+                            <field name="state" widget="badge"
+                                   decoration-success="state == 'active'"
+                                   decoration-muted="state == 'revoked'"/>
+                            <field name="scope"/>
+                            <field name="last_used"/>
+                        </group>
+                        <group string="Usage">
+                            <field name="quota_used_today"/>
+                            <field name="quota_limit"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Advanced" name="advanced">
+                            <group>
+                                <group>
+                                    <field name="name"/>
+                                    <field name="user_id"/>
+                                    <field name="token_last4"/>
+                                </group>
+                                <group>
+                                    <field name="api_endpoint" readonly="1"/>
+                                    <field name="remote_connection_id" readonly="1"/>
+                                    <field name="create_date" readonly="1"/>
+                                </group>
+                            </group>
+                            <div class="text-muted" style="padding: 16px 0;">
+                                <button name="action_rotate" type="object"
+                                        string="Rotate Token"
+                                        class="btn btn-secondary"
+                                        invisible="state != 'active'"/>
+                                <button name="action_revoke" type="object"
+                                        string="Revoke Connection"
+                                        confirm="Revoking will immediately disconnect the Telegram bot and cannot be undone. Are you sure?"
+                                        class="btn btn-danger"
+                                        invisible="state == 'revoked'"
+                                        style="margin-left: 8px;"/>
+                            </div>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_rteam_ai_home" model="ir.actions.server">
+        <field name="name">Rteam AI</field>
+        <field name="model_id" ref="model_rteam_ai_connection"/>
+        <field name="state">code</field>
+        <field name="code">action = model.action_home()</field>
+    </record>
+
+</odoo>

@@ -32,9 +32,14 @@ class RteamAiConnectWizard(models.TransientModel):
     )
     label = fields.Char(
         string="Label",
-        default=lambda self: _("Default Connection"),
+        default=lambda self: self._default_label(),
         help="A name to recognize this connection later (shown in the connection list).",
     )
+
+    @api.model
+    def _default_label(self):
+        company = self.env.user.company_id.name if self.env.user.company_id else None
+        return company or "Telegram Bot"
     scope = fields.Selection(
         [
             ("read", "Read only"),

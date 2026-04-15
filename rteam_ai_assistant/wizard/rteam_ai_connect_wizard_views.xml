@@ -8,42 +8,59 @@
             <form string="Connect to Rteam AI">
                 <field name="step" invisible="1"/>
                 <field name="mode" invisible="1"/>
+                <field name="label" invisible="1"/>
 
-                <group invisible="step != 'form'">
-                    <p class="text-muted" colspan="2">
-                        This wizard creates a token that connects your Odoo instance
-                        to the Rteam AI Telegram bot. The token is shown only once.
-                        You can revoke it anytime from Settings → Rteam AI → Connections.
-                    </p>
-                    <field name="label"/>
-                    <field name="scope"/>
+                <group invisible="step != 'form'" col="1">
+                    <div class="text-center" style="padding: 16px 0;">
+                        <h2 style="margin: 0;">Chat with your Odoo in Telegram</h2>
+                        <p class="text-muted" style="margin-top: 8px;">
+                            We'll create a scoped API key and hand it to
+                            <strong>@RteamAI_bot</strong>. Takes one click —
+                            revoke anytime.
+                        </p>
+                    </div>
+                    <div class="alert alert-info" role="alert" invisible="mode != 'new'">
+                        <strong>Read only</strong> — the assistant answers questions but
+                        cannot modify any records. You can upgrade to read &amp; write
+                        later from the dashboard.
+                    </div>
+                    <group invisible="mode != 'rotate'">
+                        <field name="scope"/>
+                    </group>
                 </group>
 
-                <group invisible="step != 'result'" string="Your token is ready">
-                    <p class="alert alert-warning" colspan="2" role="alert">
-                        <strong>Copy this token now.</strong> For security reasons it
-                        will never be shown again. If you lose it, rotate the connection
-                        to issue a new one.
-                    </p>
-                    <field name="generated_token" readonly="1"/>
-                    <field name="bot_deep_link" invisible="1"/>
-                    <p colspan="2" class="text-center">
+                <group invisible="step != 'result'" col="1">
+                    <div class="text-center" style="padding: 16px 0;">
+                        <h2 style="margin: 0;">You're ready.</h2>
+                        <p class="text-muted" style="margin-top: 8px;">
+                            Tap the button below to open Telegram. The token is already
+                            linked to your account — no copy-paste needed.
+                        </p>
+                    </div>
+                    <div class="text-center">
                         <button name="action_open_bot" type="object"
                                 string="Open @RteamAI_bot on Telegram"
                                 class="btn-primary btn-lg"/>
-                    </p>
-                    <p class="text-muted" colspan="2">
-                        In Telegram: send <code>/connect</code> and paste the token when prompted,
-                        or use the button above to start the bot with the token pre-filled.
-                    </p>
+                    </div>
+                    <field name="bot_deep_link" invisible="1"/>
+                    <div class="alert alert-secondary" role="alert" style="margin-top: 16px;">
+                        <strong>Token (one-time view):</strong>
+                        <field name="generated_token" readonly="1" nolabel="1"/>
+                        <p class="text-muted" style="margin: 6px 0 0 0; font-size: 12px;">
+                            You normally don't need this — the deep link carries it.
+                            Save it only if you want to connect manually via /connect.
+                        </p>
+                    </div>
                 </group>
 
                 <footer>
-                    <button name="action_generate" type="object" string="Generate Token"
-                            class="btn-primary" invisible="step == 'result'"/>
+                    <button name="action_generate" type="object"
+                            string="Connect Telegram"
+                            class="btn-primary btn-lg" invisible="step == 'result'"/>
                     <button name="action_close" type="object" string="Done"
                             class="btn-primary" invisible="step != 'result'"/>
-                    <button special="cancel" string="Cancel" class="btn-secondary"/>
+                    <button special="cancel" string="Cancel" class="btn-secondary"
+                            invisible="step == 'result'"/>
                 </footer>
             </form>
         </field>
