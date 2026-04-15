@@ -5,7 +5,7 @@
         "Ask questions in natural language, get answers from your ERP. "
         "Voice input, multilingual. Works on Odoo 14-19, Community and Enterprise."
     ),
-    "version": "19.0.1.2.0",
+    "version": "15.0.1.2.0",
     "category": "Productivity",
     "author": "Rteam",
     "maintainer": "Rteam",
