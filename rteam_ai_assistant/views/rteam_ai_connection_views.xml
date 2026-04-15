@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_rteam_ai_connection_tree" model="ir.ui.view">
+        <field name="name">rteam.ai.connection.tree</field>
+        <field name="model">rteam.ai.connection</field>
+        <field name="arch" type="xml">
+            <list string="Connections">
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="scope"/>
+                <field name="state" decoration-success="state == 'active'" decoration-muted="state == 'revoked'" widget="badge"/>
+                <field name="token_last4"/>
+                <field name="create_date"/>
+                <field name="last_used"/>
+                <field name="quota_used_today"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_rteam_ai_connection_form" model="ir.ui.view">
+        <field name="name">rteam.ai.connection.form</field>
+        <field name="model">rteam.ai.connection</field>
+        <field name="arch" type="xml">
+            <form string="Connection">
+                <header>
+                    <button name="action_rotate" type="object" string="Rotate Token"
+                            class="btn-primary" invisible="state != 'active'"/>
+                    <button name="action_revoke" type="object" string="Revoke"
+                            confirm="Revoking this connection will immediately disconnect the Telegram bot. Are you sure?"
+                            invisible="state == 'revoked'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,active,revoked"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="user_id"/>
+                            <field name="scope"/>
+                            <field name="token_last4"/>
+                        </group>
+                        <group>
+                            <field name="api_endpoint"/>
+                            <field name="last_used"/>
+                            <field name="quota_used_today"/>
+                            <field name="quota_limit"/>
+                        </group>
+                    </group>
+                    <div invisible="state != 'active'" class="alert alert-info" role="alert">
+                        <p>
+                            Open Telegram and start a chat with the bot using this deep link:
+                            <field name="bot_deep_link" widget="url" readonly="1"/>
+                        </p>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_rteam_ai_conversation_tree" model="ir.ui.view">
+        <field name="name">rteam.ai.conversation.tree</field>
+        <field name="model">rteam.ai.conversation</field>
+        <field name="arch" type="xml">
+            <list string="Conversations" create="0">
+                <field name="create_date"/>
+                <field name="user_id"/>
+                <field name="channel"/>
+                <field name="question"/>
+                <field name="duration_ms"/>
+                <field name="tokens_used"/>
+                <field name="error" invisible="not error"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_rteam_ai_conversation_form" model="ir.ui.view">
+        <field name="name">rteam.ai.conversation.form</field>
+        <field name="model">rteam.ai.conversation</field>
+        <field name="arch" type="xml">
+            <form string="Conversation" create="0" edit="0">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="user_id"/>
+                            <field name="connection_id"/>
+                            <field name="channel"/>
+                        </group>
+                        <group>
+                            <field name="create_date"/>
+                            <field name="duration_ms"/>
+                            <field name="tokens_used"/>
+                        </group>
+                    </group>
+                    <group string="Question">
+                        <field name="question" nolabel="1"/>
+                    </group>
+                    <group string="Answer">
+                        <field name="answer" nolabel="1"/>
+                    </group>
+                    <group string="Error" invisible="not error">
+                        <field name="error" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_rteam_ai_connection" model="ir.actions.act_window">
+        <field name="name">Connections</field>
+        <field name="res_model">rteam.ai.connection</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No connections yet
+            </p>
+            <p>
+                Click <b>New</b> to connect this Odoo to the Rteam AI Telegram bot.
+                You will receive a token to paste into
+                <a href="https://t.me/RteamAI_bot">@RteamAI_bot</a>.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_rteam_ai_conversation" model="ir.actions.act_window">
+        <field name="name">Conversations</field>
+        <field name="res_model">rteam.ai.conversation</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+                No conversations yet
+            </p>
+            <p>
+                Ask @RteamAI_bot a question in Telegram — it will appear here.
+            </p>
+        </field>
+    </record>
+
+</odoo>

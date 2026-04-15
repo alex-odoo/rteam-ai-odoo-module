@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_rteam_ai_connection_user,rteam.ai.connection.user,model_rteam_ai_connection,base.group_user,1,0,0,0
+access_rteam_ai_connection_admin,rteam.ai.connection.admin,model_rteam_ai_connection,base.group_system,1,1,1,1
+access_rteam_ai_conversation_user,rteam.ai.conversation.user,model_rteam_ai_conversation,base.group_user,1,0,0,0
+access_rteam_ai_conversation_admin,rteam.ai.conversation.admin,model_rteam_ai_conversation,base.group_system,1,1,1,1
+access_rteam_ai_connect_wizard,rteam.ai.connect.wizard,model_rteam_ai_connect_wizard,base.group_system,1,1,1,1

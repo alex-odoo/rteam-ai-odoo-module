@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="rteam_ai_api_endpoint_param" model="ir.config_parameter">
+        <field name="key">rteam_ai_assistant.api_endpoint</field>
+        <field name="value">https://api.rteam.agency</field>
+    </record>
+
+    <record id="rteam_ai_bot_username_param" model="ir.config_parameter">
+        <field name="key">rteam_ai_assistant.bot_username</field>
+        <field name="value">RteamAI_bot</field>
+    </record>
+
+</odoo>

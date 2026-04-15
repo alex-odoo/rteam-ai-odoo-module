@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_rteam_ai_root"
+              name="Rteam AI"
+              sequence="90"
+              web_icon="rteam_ai_assistant,static/description/icon.png"/>
+
+    <menuitem id="menu_rteam_ai_connections"
+              name="Connections"
+              parent="menu_rteam_ai_root"
+              action="action_rteam_ai_connection"
+              sequence="10"/>
+
+    <menuitem id="menu_rteam_ai_conversations"
+              name="Conversations"
+              parent="menu_rteam_ai_root"
+              action="action_rteam_ai_conversation"
+              sequence="20"/>
+
+</odoo>
