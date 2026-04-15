@@ -85,5 +85,15 @@ class RteamAiConnectWizard(models.TransientModel):
             "context": self.env.context,
         }
 
+    def action_open_bot(self):
+        self.ensure_one()
+        if not self.bot_deep_link:
+            raise UserError(_("Bot link is not available. Generate a token first."))
+        return {
+            "type": "ir.actions.act_url",
+            "url": self.bot_deep_link,
+            "target": "new",
+        }
+
     def action_close(self):
         return {"type": "ir.actions.act_window_close"}

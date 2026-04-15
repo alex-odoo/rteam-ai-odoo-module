@@ -26,10 +26,11 @@
                         to issue a new one.
                     </p>
                     <field name="generated_token" readonly="1"/>
+                    <field name="bot_deep_link" invisible="1"/>
                     <p colspan="2" class="text-center">
-                        <a t-att-href="bot_deep_link" class="btn btn-primary btn-lg" target="_blank">
-                            Open @RteamAI_bot on Telegram
-                        </a>
+                        <button name="action_open_bot" type="object"
+                                string="Open @RteamAI_bot on Telegram"
+                                class="btn-primary btn-lg"/>
                     </p>
                     <p class="text-muted" colspan="2">
                         In Telegram: send <code>/connect</code> and paste the token when prompted,
