@@ -44,6 +44,17 @@ class RteamAiConnection(models.Model):
         help="Base URL of the Rteam AI service. Change only if you run a "
              "self-hosted Rteam AI instance.",
     )
+    remote_connection_id = fields.Char(
+        string="Remote ID",
+        readonly=True,
+        help="Identifier of this connection on the Rteam AI service. "
+             "Populated after the token is registered with our backend.",
+    )
+    remote_organization_name = fields.Char(
+        string="Remote Organization",
+        readonly=True,
+        help="Organization name under which this connection is tracked on the Rteam AI service.",
+    )
     bot_deep_link = fields.Char(
         string="Bot Deep Link",
         compute="_compute_bot_deep_link",

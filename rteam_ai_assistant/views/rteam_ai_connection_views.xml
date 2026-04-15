@@ -44,6 +44,8 @@
                         </group>
                         <group>
                             <field name="api_endpoint"/>
+                            <field name="remote_organization_name" invisible="not remote_organization_name"/>
+                            <field name="remote_connection_id" invisible="not remote_connection_id"/>
                             <field name="last_used"/>
                             <field name="quota_used_today"/>
                             <field name="quota_limit"/>
