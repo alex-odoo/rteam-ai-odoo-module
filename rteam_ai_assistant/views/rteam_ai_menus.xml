@@ -7,18 +7,4 @@
               action="action_rteam_ai_home"
               web_icon="rteam_ai_assistant,static/description/icon.png"/>
 
-    <menuitem id="menu_rteam_ai_connections"
-              name="Connections"
-              parent="menu_rteam_ai_root"
-              action="action_rteam_ai_connection"
-              groups="base.group_no_one"
-              sequence="80"/>
-
-    <menuitem id="menu_rteam_ai_conversations"
-              name="Conversations"
-              parent="menu_rteam_ai_root"
-              action="action_rteam_ai_conversation"
-              groups="base.group_no_one"
-              sequence="90"/>
-
 </odoo>

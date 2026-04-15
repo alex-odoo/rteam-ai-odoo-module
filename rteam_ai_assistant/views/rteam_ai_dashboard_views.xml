@@ -50,17 +50,48 @@
                                     <field name="create_date" readonly="1"/>
                                 </group>
                             </group>
-                            <div class="text-muted" style="padding: 16px 0;">
-                                <button name="action_rotate" type="object"
-                                        string="Rotate Token"
-                                        class="btn btn-secondary"
-                                        invisible="state != 'active'"/>
-                                <button name="action_revoke" type="object"
-                                        string="Revoke Connection"
-                                        confirm="Revoking will immediately disconnect the Telegram bot and cannot be undone. Are you sure?"
-                                        class="btn btn-danger"
-                                        invisible="state == 'revoked'"
-                                        style="margin-left: 8px;"/>
+                            <div class="o_row" style="padding: 24px 0 8px 0; border-top: 1px solid #dee2e6;">
+                                <h4 style="margin: 12px 0;">Manage this connection</h4>
+                            </div>
+
+                            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 12px 0;">
+                                <div style="flex: 0 0 160px;">
+                                    <button name="action_rotate" type="object"
+                                            string="Rotate Token"
+                                            class="btn btn-secondary"
+                                            help="Generate a new token. The current one stops working immediately. Use this if your token was shared by mistake, or to upgrade the scope from read-only to read &amp; write."
+                                            invisible="state != 'active'"/>
+                                </div>
+                                <div class="text-muted" style="flex: 1; font-size: 13px;">
+                                    <i class="fa fa-info-circle" style="margin-right: 4px;" title="Generate a new token. The current one stops working immediately."/>
+                                    Generate a new token and invalidate the current one.
+                                    Use this if the token leaked, if you want to change the
+                                    scope (read-only ↔ read &amp; write), or just as a
+                                    periodic security rotation. The @RteamAI_bot deep link
+                                    will be refreshed — send it to yourself again.
+                                </div>
+                            </div>
+
+                            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 12px 0;">
+                                <div style="flex: 0 0 160px;">
+                                    <button name="action_revoke" type="object"
+                                            string="Revoke Connection"
+                                            confirm="Revoking will immediately disconnect the Telegram bot and cannot be undone. You can reconnect from scratch through Settings → Rteam AI, but this connection record will be permanently marked Revoked. Continue?"
+                                            class="btn btn-danger"
+                                            help="Permanently disconnect. The bot stops answering, the token is destroyed, the Odoo API key created for Rteam AI is left in place (delete it manually from My Profile → Account Security if desired)."
+                                            invisible="state == 'revoked'"/>
+                                </div>
+                                <div class="text-muted" style="flex: 1; font-size: 13px;">
+                                    <i class="fa fa-exclamation-triangle" style="margin-right: 4px; color: #dc3545;" title="Cannot be undone."/>
+                                    Permanently disconnect this Odoo from the Telegram
+                                    assistant. The token is destroyed, the bot stops
+                                    answering your queries, and this record is locked in
+                                    Revoked state. You can always start fresh with
+                                    <strong>Rteam AI → Connect Telegram</strong>. The
+                                    Odoo API key we created under your user is left in
+                                    place — delete it from your profile if you want a
+                                    full cleanup.
+                                </div>
                             </div>
                         </page>
                     </notebook>
