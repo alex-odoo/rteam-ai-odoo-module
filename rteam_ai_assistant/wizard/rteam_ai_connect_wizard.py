@@ -111,8 +111,12 @@ class RteamAiConnectWizard(models.TransientModel):
         once, then it is encrypted at rest on our side and never returned.
         """
         name = "%s (%s)" % (API_KEY_NAME_PREFIX, token_hash[:12])
+        apikeys = self.env["res.users.apikeys"]
         try:
-            return self.env["res.users.apikeys"]._generate("rpc", name)
+            try:
+                return apikeys._generate("rpc", name, False)
+            except TypeError:
+                return apikeys._generate("rpc", name)
         except Exception as exc:
             _logger.exception("Failed to generate Odoo API key for user %s", self.env.user.id)
             raise UserError(_(
