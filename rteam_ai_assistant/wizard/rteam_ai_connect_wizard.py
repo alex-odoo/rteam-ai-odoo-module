@@ -38,8 +38,10 @@ class RteamAiConnectWizard(models.TransientModel):
 
     @api.model
     def _default_label(self):
-        company = self.env.user.company_id.name if self.env.user.company_id else None
-        return company or "Telegram Bot"
+        user_name = (self.env.user.name or "").strip()
+        if user_name:
+            return "%s connection" % user_name
+        return "Telegram connection"
     scope = fields.Selection(
         [
             ("read", "Read only"),
