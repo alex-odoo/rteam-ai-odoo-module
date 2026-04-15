@@ -7,7 +7,7 @@ class TestRteamAiConnection(TransactionCase):
         conn = self.env["rteam.ai.connection"].create({})
         self.assertEqual(conn.state, "draft")
         self.assertEqual(conn.scope, "read")
-        self.assertEqual(conn.api_endpoint, "https://api.rteam.agency")
+        self.assertEqual(conn.api_endpoint, "https://rteam.agency")
         self.assertEqual(conn.user_id, self.env.user)
 
     def test_02_issue_token_marks_active(self):

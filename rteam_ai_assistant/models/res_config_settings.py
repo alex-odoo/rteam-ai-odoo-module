@@ -7,7 +7,7 @@ class ResConfigSettings(models.TransientModel):
     rteam_ai_api_endpoint = fields.Char(
         string="Rteam AI API Endpoint",
         config_parameter="rteam_ai_assistant.api_endpoint",
-        default="https://api.rteam.agency",
+        default="https://rteam.agency",
         help="Base URL of the Rteam AI service.",
     )
     rteam_ai_bot_username = fields.Char(

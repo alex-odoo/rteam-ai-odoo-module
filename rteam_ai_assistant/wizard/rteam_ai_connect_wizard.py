@@ -128,7 +128,7 @@ class RteamAiConnectWizard(models.TransientModel):
     def _register_with_rteam_ai(self, connection, token_hash, api_key):
         api_endpoint = (
             self.env["ir.config_parameter"].sudo().get_param(
-                "rteam_ai_assistant.api_endpoint", "https://api.rteam.agency"
+                "rteam_ai_assistant.api_endpoint", "https://rteam.agency"
             ).rstrip("/")
         )
 

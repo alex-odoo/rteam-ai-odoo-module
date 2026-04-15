@@ -40,7 +40,7 @@ class RteamAiConnection(models.Model):
     api_endpoint = fields.Char(
         string="API Endpoint",
         required=True,
-        default="https://api.rteam.agency",
+        default="https://rteam.agency",
         help="Base URL of the Rteam AI service. Change only if you run a "
              "self-hosted Rteam AI instance.",
     )
