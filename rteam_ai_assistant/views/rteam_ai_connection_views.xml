@@ -5,7 +5,7 @@
         <field name="name">rteam.ai.connection.tree</field>
         <field name="model">rteam.ai.connection</field>
         <field name="arch" type="xml">
-            <list string="Connections" create="0">
+            <tree string="Connections" create="0">
                 <field name="name"/>
                 <field name="user_id"/>
                 <field name="scope"/>
@@ -14,7 +14,7 @@
                 <field name="create_date"/>
                 <field name="last_used"/>
                 <field name="quota_used_today"/>
-            </list>
+            </tree>
         </field>
     </record>
 
@@ -25,10 +25,10 @@
             <form string="Connection">
                 <header>
                     <button name="action_rotate" type="object" string="Rotate Token"
-                            class="btn-primary" invisible="state != 'active'"/>
+                            class="btn-primary" attrs="{'invisible': [('state', '!=', 'active')]}"/>
                     <button name="action_revoke" type="object" string="Revoke"
                             confirm="Revoking this connection will immediately disconnect the Telegram bot. Are you sure?"
-                            invisible="state == 'revoked'"/>
+                            attrs="{'invisible': [('state', '=', 'revoked')]}"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,active,revoked"/>
                 </header>
                 <sheet>
@@ -44,14 +44,14 @@
                         </group>
                         <group>
                             <field name="api_endpoint"/>
-                            <field name="remote_organization_name" invisible="not remote_organization_name"/>
-                            <field name="remote_connection_id" invisible="not remote_connection_id"/>
+                            <field name="remote_organization_name" attrs="{'invisible': [('remote_organization_name', '=', False)]}"/>
+                            <field name="remote_connection_id" attrs="{'invisible': [('remote_connection_id', '=', False)]}"/>
                             <field name="last_used"/>
                             <field name="quota_used_today"/>
                             <field name="quota_limit"/>
                         </group>
                     </group>
-                    <div invisible="state != 'active'" class="alert alert-info" role="alert">
+                    <div attrs="{'invisible': [('state', '!=', 'active')]}" class="alert alert-info" role="alert">
                         <p>
                             Open Telegram and start a chat with the bot using this deep link:
                             <field name="bot_deep_link" widget="url" readonly="1"/>
@@ -66,15 +66,15 @@
         <field name="name">rteam.ai.conversation.tree</field>
         <field name="model">rteam.ai.conversation</field>
         <field name="arch" type="xml">
-            <list string="Conversations" create="0">
+            <tree string="Conversations" create="0">
                 <field name="create_date"/>
                 <field name="user_id"/>
                 <field name="channel"/>
                 <field name="question"/>
                 <field name="duration_ms"/>
                 <field name="tokens_used"/>
-                <field name="error" invisible="not error"/>
-            </list>
+                <field name="error" attrs="{'invisible': [('error', '=', False)]}"/>
+            </tree>
         </field>
     </record>
 
@@ -102,7 +102,7 @@
                     <group string="Answer">
                         <field name="answer" nolabel="1"/>
                     </group>
-                    <group string="Error" invisible="not error">
+                    <group string="Error" attrs="{'invisible': [('error', '=', False)]}">
                         <field name="error" nolabel="1"/>
                     </group>
                 </sheet>
@@ -113,7 +113,7 @@
     <record id="action_rteam_ai_connection" model="ir.actions.act_window">
         <field name="name">Connections</field>
         <field name="res_model">rteam.ai.connection</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">tree,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 No connections yet
@@ -129,7 +129,7 @@
     <record id="action_rteam_ai_conversation" model="ir.actions.act_window">
         <field name="name">Conversations</field>
         <field name="res_model">rteam.ai.conversation</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">tree,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_empty_folder">
                 No conversations yet
