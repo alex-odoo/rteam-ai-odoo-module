@@ -168,7 +168,7 @@ class RteamAiConnectWizard(models.TransientModel):
             data=body,
             headers={
                 "Content-Type": "application/json",
-                "User-Agent": "rteam_ai_assistant/19.0 (Odoo module)",
+                "User-Agent": "rteam_ai_assistant/14.0 (Odoo module)",
             },
             method="POST",
         )

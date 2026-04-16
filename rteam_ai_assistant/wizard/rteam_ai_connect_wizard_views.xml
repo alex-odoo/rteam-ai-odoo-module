@@ -10,7 +10,7 @@
                 <field name="mode" invisible="1"/>
                 <field name="label" invisible="1"/>
 
-                <group invisible="step != 'form'" col="1">
+                <group attrs="{'invisible': [('step', '!=', 'form')]}" col="1">
                     <div class="text-center" style="padding: 16px 0;">
                         <h2 style="margin: 0;">Chat with your Odoo in Telegram</h2>
                         <p class="text-muted" style="margin-top: 8px;">
@@ -19,17 +19,17 @@
                             revoke anytime.
                         </p>
                     </div>
-                    <div class="alert alert-info" role="alert" invisible="mode != 'new'">
+                    <div class="alert alert-info" role="alert" attrs="{'invisible': [('mode', '!=', 'new')]}">
                         <strong>Read only</strong> — the assistant answers questions but
                         cannot modify any records. You can upgrade to read &amp; write
                         later from the dashboard.
                     </div>
-                    <group invisible="mode != 'rotate'">
+                    <group attrs="{'invisible': [('mode', '!=', 'rotate')]}">
                         <field name="scope"/>
                     </group>
                 </group>
 
-                <group invisible="step != 'result'" col="1">
+                <group attrs="{'invisible': [('step', '!=', 'result')]}" col="1">
                     <div class="text-center" style="padding: 16px 0;">
                         <h2 style="margin: 0;">You're ready.</h2>
                         <p class="text-muted" style="margin-top: 8px;">
@@ -56,11 +56,11 @@
                 <footer>
                     <button name="action_generate" type="object"
                             string="Connect Telegram"
-                            class="btn-primary btn-lg" invisible="step == 'result'"/>
+                            class="btn-primary btn-lg" attrs="{'invisible': [('step', '=', 'result')]}"/>
                     <button name="action_close" type="object" string="Done"
-                            class="btn-primary" invisible="step != 'result'"/>
+                            class="btn-primary" attrs="{'invisible': [('step', '!=', 'result')]}"/>
                     <button special="cancel" string="Cancel" class="btn-secondary"
-                            invisible="step == 'result'"/>
+                            attrs="{'invisible': [('step', '=', 'result')]}"/>
                 </footer>
             </form>
         </field>
