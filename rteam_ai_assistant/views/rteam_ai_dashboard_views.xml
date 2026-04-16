@@ -46,7 +46,7 @@
                                     string="Rotate Token"
                                     class="btn btn-secondary"
                                     help="Generate a new token. The current one stops working immediately."
-                                    invisible="state != 'active'"/>
+                                    attrs="{'invisible': [('state', '!=', 'active')]}"/>
                         </div>
                         <div class="text-muted" style="flex: 1; font-size: 13px;">
                             <i class="fa fa-info-circle" style="margin-right: 4px;"/>
@@ -65,7 +65,7 @@
                                     confirm="Revoking will immediately disconnect the Telegram bot and cannot be undone. You can reconnect from scratch via Rteam AI → Connect Telegram. Continue?"
                                     class="btn btn-danger"
                                     help="Permanently disconnect. The bot stops answering, the token is destroyed."
-                                    invisible="state == 'revoked'"/>
+                                    attrs="{'invisible': [('state', '=', 'revoked')]}"/>
                         </div>
                         <div class="text-muted" style="flex: 1; font-size: 13px;">
                             <i class="fa fa-exclamation-triangle" style="margin-right: 4px; color: #dc3545;"/>
