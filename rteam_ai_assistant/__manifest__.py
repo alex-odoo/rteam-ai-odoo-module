@@ -1,5 +1,5 @@
 {
-    "name": "Rteam AI Assistant — Chat with Your Odoo in Telegram",
+    "name": "AI Analytic Assistant",
     "summary": (
         "AI-powered assistant for Odoo via @RteamAI_bot on Telegram. "
         "Ask questions in natural language, get answers from your ERP. "
