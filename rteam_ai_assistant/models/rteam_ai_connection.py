@@ -90,13 +90,13 @@ class RteamAiConnection(models.Model):
         help="Daily query limit enforced by the Rteam AI service based on your subscription tier.",
     )
 
-    _sql_constraints = [
-        (
-            "token_hash_uniq",
-            "unique(token_hash)",
-            "A connection with this token already exists.",
-        ),
-    ]
+    # Odoo 19 ignores _sql_constraints, so the old declaration never reached
+    # the database. Revoked and draft rows hold no hash (NULL), which UNIQUE
+    # allows any number of times.
+    _token_hash_uniq = models.Constraint(
+        "UNIQUE(token_hash)",
+        "A connection with this token already exists.",
+    )
 
     @api.depends("state")
     def _compute_bot_deep_link(self):
