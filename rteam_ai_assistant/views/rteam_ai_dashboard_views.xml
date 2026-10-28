@@ -49,7 +49,7 @@
                                     invisible="state != 'active'"/>
                         </div>
                         <div class="text-muted" style="flex: 1; font-size: 13px;">
-                            <i class="fa fa-info-circle" style="margin-right: 4px;"/>
+                            <i class="oi oi-filled" data-icon="info" style="margin-right: 4px;"/>
                             Generate a new token and invalidate the current one.
                             Use this if the token leaked, if you want to change the
                             scope (read-only ↔ read &amp; write), or as periodic
@@ -68,7 +68,7 @@
                                     invisible="state == 'revoked'"/>
                         </div>
                         <div class="text-muted" style="flex: 1; font-size: 13px;">
-                            <i class="fa fa-exclamation-triangle" style="margin-right: 4px; color: #dc3545;"/>
+                            <i class="oi" data-icon="warning" style="margin-right: 4px; color: #dc3545;"/>
                             Permanently disconnect this Odoo from the Telegram
                             assistant. The token is destroyed, the bot stops
                             answering, and this record is locked in Revoked state.

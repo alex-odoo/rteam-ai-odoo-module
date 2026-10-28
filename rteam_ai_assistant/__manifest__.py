@@ -21,12 +21,12 @@
         "python": [],
     },
     "data": [
-        "security/ir.model.access.csv",
         "data/ir_config_parameter_data.xml",
         "views/rteam_ai_connection_views.xml",
         "views/rteam_ai_dashboard_views.xml",
         "wizard/rteam_ai_connect_wizard_views.xml",
         "views/rteam_ai_menus.xml",
+        'security/ir.access.csv',
     ],
     "images": [
         "static/description/banner.png",
