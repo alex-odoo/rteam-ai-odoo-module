@@ -21,7 +21,7 @@ Features
 Supported versions
 ------------------
 
-Odoo 14, 15, 16, 17, 18, 19 — Community and Enterprise.
+Odoo 14, 15, 16, 17, 18, 19, 20 — Community and Enterprise.
 
 Installation
 ------------

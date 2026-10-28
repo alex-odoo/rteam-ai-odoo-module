@@ -90,7 +90,7 @@ class RteamAiConnectWizard(models.TransientModel):
         api_key = self._generate_odoo_api_key(token_hash)
         self._register_with_rteam_ai(connection, token_hash, api_key)
 
-        bot_username = self.env["ir.config_parameter"].sudo().get_param(
+        bot_username = self.env["ir.config_parameter"].sudo().get_str(
             "rteam_ai_assistant.bot_username", "RteamAI_bot"
         )
         self.write({
@@ -140,13 +140,13 @@ class RteamAiConnectWizard(models.TransientModel):
 
     def _register_with_rteam_ai(self, connection, token_hash, api_key):
         api_endpoint = (
-            self.env["ir.config_parameter"].sudo().get_param(
+            self.env["ir.config_parameter"].sudo().get_str(
                 "rteam_ai_assistant.api_endpoint", "https://rteam.agency"
             ).rstrip("/")
         )
 
         icp = self.env["ir.config_parameter"].sudo()
-        odoo_url = icp.get_param("web.base.url") or ""
+        odoo_url = icp.get_str("web.base.url")
         odoo_database = self.env.cr.dbname
         odoo_user_login = self.env.user.login
         company = self.env.user.company_id.name if self.env.user.company_id else None

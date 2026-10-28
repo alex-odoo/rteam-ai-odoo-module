@@ -107,7 +107,7 @@ class RteamAiConnection(models.Model):
         user's Telegram account is bound to this Odoo, the bot recognises
         them by telegramId — no payload needed.
         """
-        bot_username = self.env["ir.config_parameter"].sudo().get_param(
+        bot_username = self.env["ir.config_parameter"].sudo().get_str(
             "rteam_ai_assistant.bot_username", "RteamAI_bot"
         )
         for record in self:

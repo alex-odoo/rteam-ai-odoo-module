@@ -3,9 +3,9 @@
     "summary": (
         "AI-powered assistant for Odoo via @RteamAI_bot on Telegram. "
         "Ask questions in natural language, get answers from your ERP. "
-        "Voice input, multilingual. Works on Odoo 14-19, Community and Enterprise."
+        "Voice input, multilingual. Works on Odoo 14-20, Community and Enterprise."
     ),
-    "version": "19.0.1.2.1",
+    "version": "20.0.1.2.1",
     "category": "Productivity",
     "author": "Rteam",
     "maintainer": "Rteam",

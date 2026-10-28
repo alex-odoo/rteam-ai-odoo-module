@@ -16,6 +16,7 @@ This repository ships the `rteam_ai_assistant` module for:
 | `17.0` | Odoo 17      | Community + Enterprise |
 | `18.0` | Odoo 18      | Community + Enterprise |
 | `19.0` | Odoo 19      | Community + Enterprise |
+| `20.0` | Odoo 20      | Community + Enterprise |
 
 Each branch is independently installable and tested on the matching Odoo release.
 
